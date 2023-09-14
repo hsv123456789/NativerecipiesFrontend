@@ -1,0 +1,71 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background-color: #ebebeb;
+  --primary: #00a300;
+  --primary-hover: #04bf04;
+  --border-color: #a5a4a4;
+  --heading-color: #4b4a4a;
+  --subheading-color: #666666;
+  --card-background: #f4f4f4;
+}
+
+.login {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 0.2fr 1fr;
+  grid-template-columns: 1fr;
+}
+.loginCard {
+  display: flex;
+  background-color: var(--card-background);
+  flex-direction: column;
+  width: 23rem;
+  padding: 2em;
+}
+
+input {
+  all: unset;
+  background-color: white;
+  padding: 10px;
+  border: 1px white solid;
+}
+input:focus {
+  border-color: var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+#passwordLogin:focus {
+  border-color: white;
+  transition: none;
+}
+#confirmPassword:focus {
+  border-color: white;
+}
+.password_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px white solid;
+  background-color: white;
+}
+.password_input button {
+  all: unset;
+}
+.password_input:focus-within {
+  border-color: var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  all: unset;
+  margin-right: 20px;
+  background-color: var(--primary);
+  margin-top: 10px;
+
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
