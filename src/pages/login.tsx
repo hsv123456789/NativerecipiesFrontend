@@ -34,7 +34,7 @@ export default function Login() {
   });
   //Random comments
   const submit = () => {
-    console.error(initialValue);
+    console.log(initialValue);
     loginUser(dispatch, initialValue);
   };
 
