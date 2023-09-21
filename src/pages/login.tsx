@@ -6,7 +6,6 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { loginUser } from "../store/auth/authActions";
 import "./login.css";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
 
 type Values = {
   username: string; // Changed from usernameLogin
