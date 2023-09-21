@@ -1,0 +1,28 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background-color: #ebebeb;
+  --primary: #00a300;
+  --primary-hover: #04bf04;
+  --border-color: #a5a4a4;
+  --heading-color: #4b4a4a;
+  --subheading-color: #666666;
+  --card-background: #f4f4f4;
+  --search-background: #d8d8d8;
+}
+.main {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 0.2fr 1fr;
+  height: 100vh;
+}
+
+.search_div {
+  align-items: center;
+}
+.userText {
+  background-color: var(--search-background);
+  border: border solid;
+  width: 400px;
+  height: 30px;
+  border-radius: 50px;
+}

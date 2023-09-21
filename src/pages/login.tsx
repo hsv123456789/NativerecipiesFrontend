@@ -6,9 +6,11 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { loginUser } from "../store/auth/authActions";
 import "./login.css";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+
 type Values = {
-  usernameLogin: string;
-  passwordLogin: string;
+  username: string; // Changed from usernameLogin
+  password: string; // Changed from passwordLogin
 };
 
 export default function Login() {
@@ -17,96 +19,99 @@ export default function Login() {
   const notVisible = () => {
     setVisiblePassword(!visiblepassword);
   };
+
   const initialValue: Values = {
-    usernameLogin: "",
-    passwordLogin: "",
+    username: "",
+    password: "",
   };
 
   const validationSchema = yup.object({
-    usernameLogin: yup
+    username: yup
       .string()
       .required("Username is required")
-      .min(2, "username is too short"),
-    passwordLogin: yup
+      .min(2, "Username is too short"),
+    password: yup
       .string()
-      .required("password is required")
-      .min(8, "passwrod is too short"),
+      .required("Password is required")
+      .min(8, "Password is too short"),
   });
-  //Random comments
-  const submit = () => {
-    console.log(initialValue);
-    loginUser(dispatch, initialValue);
+
+  const submit = async (values: Values) => {
+    console.log(values);
+    try {
+      await loginUser(dispatch, {
+        username: values.username,
+        password: values.password,
+      });
+    } catch (err) {
+      console.log("The error catched from login login page" + err);
+    }
   };
 
   return (
-    <div className="login">
-      <h1>Login</h1>
-      <div className="loginCard">
-        <Formik
-          initialValues={initialValue}
-          validationSchema={validationSchema}
-          onSubmit={submit}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <div className="form-group">
-                <label htmlFor="userName">First Name</label>
-
-                <Field
-                  id="usernameLogin"
-                  name="usernameLogin"
-                  placeholder="Enter your username"
-                  className={`form-control ${
-                    touched.usernameLogin && errors.usernameLogin
-                      ? "is-invalid"
-                      : ""
-                  }`}
-                />
-
-                <ErrorMessage
-                  name="usernameLogin"
-                  component="div"
-                  className="invalid-feedback"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <div className="password_input">
+    <>
+      <div className="login">
+        <h1>Login</h1>
+        <div className="loginCard">
+          <Formik
+            initialValues={initialValue}
+            validationSchema={validationSchema}
+            onSubmit={submit}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <div className="form-group">
+                  <label htmlFor="username">Username</label>{" "}
                   <Field
-                    id="passwordLogin"
-                    name="passwordLogin"
-                    type={visiblepassword ? "text" : "password"}
-                    placeholder="Enter your password"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
                     className={`form-control ${
-                      touched.passwordLogin && errors.passwordLogin
-                        ? "is-invalid"
-                        : ""
+                      touched.username && errors.username ? "is-invalid" : ""
                     }`}
                   />
-                  <button onClick={notVisible}>
-                    {visiblepassword ? (
-                      <AiOutlineEye />
-                    ) : (
-                      <AiOutlineEyeInvisible />
-                    )}
-                  </button>
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="invalid-feedback"
+                  />
                 </div>
 
-                <ErrorMessage
-                  name="passwordLogin"
-                  component="div"
-                  className="invalid-feedback"
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <div className="password_input">
+                    <Field
+                      id="password"
+                      name="password"
+                      type={visiblepassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      className={`form-control ${
+                        touched.password && errors.password ? "is-invalid" : ""
+                      }`}
+                    />
+                    <button onClick={notVisible}>
+                      {visiblepassword ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </button>
+                  </div>
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </div>
 
-              <button type="submit" className="">
-                Login
-              </button>
-            </Form>
-          )}
-        </Formik>
+                <button type="submit" className="">
+                  Login
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -4,6 +4,9 @@ import * as yup from "yup";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 type Values = {
   userName: string;
   email: string;
@@ -55,6 +58,39 @@ export default function Register() {
 
   const register = (values: Values) => {
     console.log(values);
+    const finalValue = {
+      username: values.userName,
+      password: values.password,
+      email: values.email,
+    };
+    axios
+      .post("http://localhost:3000/api/users/signup", finalValue)
+      .then((data) => {
+        console.log(data);
+        toast.success("Registration sucessful", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+        toast.error(error.response.data.error, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   };
   return (
     <div className="register">
@@ -159,6 +195,7 @@ export default function Register() {
           )}
         </Formik>
       </div>
+      <ToastContainer />
     </div>
   );
 }
