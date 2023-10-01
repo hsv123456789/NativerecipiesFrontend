@@ -8,8 +8,8 @@ import "./login.css";
 import { useDispatch } from "react-redux";
 
 type Values = {
-  username: string; // Changed from usernameLogin
-  password: string; // Changed from passwordLogin
+  username: string;
+  password: string;
 };
 
 export default function Login() {

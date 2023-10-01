@@ -46,7 +46,9 @@ export default function Navbar(): JSX.Element {
       <div style={{ display: "flex", gap: "20px" }}>
         {isAuthenticated ? (
           <>
-            <h1> Hello ,{user?.username}</h1>
+            <button className="dropbtn">
+              <h1> Hello ,{user?.username}</h1>
+            </button>
             <button onClick={logout}>Logout</button>
           </>
         ) : (
